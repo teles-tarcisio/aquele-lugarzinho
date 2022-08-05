@@ -22,7 +22,12 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "no-console": "warn",
+        "no-console": [
+            "error",
+            {
+               "allow": [ "warn", "error" ]
+            }
+        ],
         "import/prefer-default-export": "warn",
         "no-unused-vars": "warn",
         "no-throw-literal": "warn",

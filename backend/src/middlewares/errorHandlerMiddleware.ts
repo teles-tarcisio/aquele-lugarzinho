@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { errorUtils } from '../utils/index.js';
 
-export default function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
+export default function errorHandler(err: any, req: Request, res: Response) {
   console.error('An error occurred!', err);
   if (errorUtils.isAppError(err)) {
     const statusCode = errorUtils.errorTypeToStatusCode(err.type);
