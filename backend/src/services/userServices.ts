@@ -16,6 +16,15 @@ async function isEmailUnique(userEmail: string) {
   return user;
 }
 
+async function isNicknameUnique(userNickname: string) {
+  const user = await userRepository.findByNickname(userNickname);
+  if (user) {
+    throw errorUtils.conflictError('nickname already registered');
+  }
+
+  return user;
+}
+
 async function userEmailExists(userEmail: string) {
   const user = await userRepository.findByEmail(userEmail);
   if (!user) {
@@ -27,6 +36,8 @@ async function userEmailExists(userEmail: string) {
 
 async function create(newUser: NewUser) {
   await isEmailUnique(newUser.email);
+
+  await isNicknameUnique(newUser.nickname);
 
   const hashedPassword = await encryptPassword(newUser.password);
   newUser.password = hashedPassword;

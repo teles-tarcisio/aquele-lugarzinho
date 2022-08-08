@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import { validateSchema } from '../middlewares/index.js';
-import { newUserSchema } from '../schemas/newUserSchema.js';
+import {
+  newUserSchema,
+  loginSchema,
+} from '../schemas/index.js';
 import { userController } from '../controllers/index.js';
 
 const userRouter = Router();
@@ -13,7 +16,7 @@ userRouter.post(
 
 userRouter.post(
   '/sign-in',
-  // validateSchema(newUserSchema),
+  validateSchema(loginSchema),
   userController.login,
 );
 
