@@ -22,9 +22,16 @@ async function findRepeated(location: NewLocationData) {
   return uniqueLocation;
 }
 
+async function findAll() {
+  const allLocations = await prisma.location.findMany();
+
+  return allLocations;
+}
+
 const locationRepository = {
   insert,
   findRepeated,
+  findAll,
 };
 
 export default locationRepository;

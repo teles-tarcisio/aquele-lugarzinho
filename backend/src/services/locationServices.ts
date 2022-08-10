@@ -18,8 +18,18 @@ async function create(newLocation: NewLocationData) {
   return createdLocation;
 }
 
+async function getAll() {
+  const locations = await locationRepository.findAll();
+  if (locations.length === 0) {
+    throw errorUtils.notFoundError('could not find any locations');
+  }
+
+  return locations;
+}
+
 const locationServices = {
   create,
+  getAll,
 };
 
 export default locationServices;
