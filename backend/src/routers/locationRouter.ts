@@ -3,7 +3,7 @@ import {
   ensureAuthentication,
   validateSchema,
 } from '../middlewares/index.js';
-import { newLocationSchema } from '../schemas/newLocationSchema.js';
+import { newLocationSchema } from '../schemas/index.js';
 import { locationController } from '../controllers/index.js';
 
 const locationRouter = Router();

@@ -1,13 +1,15 @@
 import { Request, Response } from 'express';
-// import { userServices } from '../services/index.js';
-// import { NewUser } from '../repositories/userRepository.js';
+import { reviewServices } from '../services/index.js';
 
 export async function create(req: Request, res: Response) {
-  const { userAuthData } = res?.locals?.payload;
+  const { validSchema } = res?.locals?.payload;
+  await reviewServices.create(validSchema);
 
-  // check if userId exists
-  // check if locationId exists
-  // create new review
+  return res.sendStatus(201);
+}
 
-  return res.status(501).send(userAuthData);
+export async function get(req: Request, res: Response) {
+  const result = await reviewServices.getAll();
+
+  return res.status(200).send(result);
 }

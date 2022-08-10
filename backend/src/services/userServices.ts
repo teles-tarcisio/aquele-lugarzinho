@@ -56,11 +56,19 @@ async function login(userData: NewUser) {
   return newToken;
 }
 
+async function userIdExists(userId: number) {
+  const userById = await userRepository.findById(userId);
+  if (!userById) {
+    throw errorUtils.notFoundError('userId does not exist');
+  }
+}
+
 const userServices = {
   create,
   login,
   isEmailUnique,
   userEmailExists,
+  userIdExists,
 };
 
 export default userServices;

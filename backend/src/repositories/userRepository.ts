@@ -30,10 +30,21 @@ async function findByNickname(userNickname: string) {
   return promise;
 }
 
+async function findById(userId: number) {
+  const promise = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  return promise;
+}
+
 const userRepository = {
   insert,
   findByEmail,
   findByNickname,
+  findById,
 };
 
 export default userRepository;

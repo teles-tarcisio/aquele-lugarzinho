@@ -27,9 +27,17 @@ async function getAll() {
   return locations;
 }
 
+async function locationIdExists(locationId: number) {
+  const locationById = await locationRepository.findById(locationId);
+  if (!locationById) {
+    throw errorUtils.notFoundError('locationId does not exist');
+  }
+}
+
 const locationServices = {
   create,
   getAll,
+  locationIdExists,
 };
 
 export default locationServices;

@@ -28,10 +28,21 @@ async function findAll() {
   return allLocations;
 }
 
+async function findById(locationId: number) {
+  const promise = await prisma.location.findUnique({
+    where: {
+      id: locationId,
+    },
+  });
+
+  return promise;
+}
+
 const locationRepository = {
   insert,
   findRepeated,
   findAll,
+  findById,
 };
 
 export default locationRepository;
