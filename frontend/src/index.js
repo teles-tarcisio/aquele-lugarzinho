@@ -5,7 +5,7 @@ import { red, pink } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import App from './App';
 
-//app custom theme
+// app custom theme
 const theme = createTheme({
   palette: {
     primary: {
