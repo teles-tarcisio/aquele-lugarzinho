@@ -6,4 +6,5 @@ export const newUserSchema = Joi.object<NewUser>({
   nickname: Joi.string().trim().min(4).required(),
   email: Joi.string().trim().email().required(),
   password: Joi.string().trim().min(4).required(),
+  userImageUrl: Joi.string().uri(),
 });
