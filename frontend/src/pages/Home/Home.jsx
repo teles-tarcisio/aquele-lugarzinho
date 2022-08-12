@@ -56,7 +56,7 @@ export default function Home() {
               e aí, achou um lugarzinho novo ou tá procurando aquela comida que conforta até a alma?
             </Typography>
 
-            <AddContentButtons token={auth.token} />
+            <AddContentButtons auth={auth} />
             {/* <CategoryButtons token={auth.token} setFilter={setFilter} /> */}
 
           </Container>

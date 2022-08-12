@@ -1,22 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import {
   AppBar,
-  Box,
   Toolbar,
-  IconButton,
   Typography,
-  Menu,
   Container,
-  Avatar,
-  Button,
-  Tooltip,
-  MenuItem,
 } from '@mui/material';
 
 export default function TopBar() {
   return (
-    <AppBar sx={{ bgcolor: '#388E3c', borderRadius: '12px' }} position="static">
+    <AppBar sx={{ bgcolor: 'primary', borderRadius: '12px' }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography

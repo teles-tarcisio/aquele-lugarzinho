@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import {
+  Autocomplete,
   Button,
   Dialog,
   DialogActions,
@@ -9,38 +9,50 @@ import {
   DialogContentText,
   DialogTitle,
   Input,
-  InputLabel,
   Stack,
   TextField,
 } from '@mui/material';
 import * as api from '../../services/api';
-import CustomUploadButton from './CustomUploadButton';
 
-export default function AddContentButtons({ token }) {
-  const [openDialog, setOpenDialog] = useState(false);
-  const filesElement = useRef(null);
+export default function AddContentButtons({ auth }) {
+  const [locationDialog, setLocationDialog] = useState(false);
+  const [reviewDialog, setReviewDialog] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [chosenLocation, setChosenLocation] = useState(null);
+  const [inputLocation, setInputLocation] = useState('');
+  const [locationsArray, setLocationsArray] = useState([]);
 
-  function handleAddLocation(ev) {
-    console.log(ev.target);
-    setOpenDialog(true);
+  function handleAddLocation() {
+    setLocationDialog(true);
+    setReviewDialog(false);
   }
+
+  function handleAddReview() {
+    setReviewDialog(true);
+    setLocationDialog(false);
+  }
+
   function handleClose() {
-    setOpenDialog(false);
+    setLocationDialog(false);
+    setReviewDialog(false);
   }
 
   function handleFileChange(ev) {
-    console.log(ev.target.files);
     setSelectedFile(ev.target.files[0]);
   }
 
   async function handleSend() {
-    const body = new FormData();
-    body.set('key', '34659037bd18afd2a6b33f03fbe71b5e');
-    body.append('image', selectedFile);
-    const result = await axios.post('https://api.imgbb.com/1/upload', body);
-    console.log(result.data);
+    const imgUpload = await api.uploadImage(selectedFile);
+    console.log(imgUpload.data.display_url);
   }
+
+  useEffect(() => {
+    const allLocations = api.getLocations(auth.token);
+    allLocations.then((response) => {
+      setLocationsArray(response.data);
+      console.log(response.data);
+    });
+  }, [auth]);
 
   return (
     <>
@@ -59,8 +71,17 @@ export default function AddContentButtons({ token }) {
         >
           Adicionar &ldquo;Lugarzinho&rdquo;
         </Button>
+        <Button
+          key="add-review-button"
+          sx={{ bgcolor: '#388E3c' }}
+          variant="contained"
+          onClick={handleAddReview}
+          id="add-review-button"
+        >
+          Adicionar Avaliação
+        </Button>
       </Stack>
-      <Dialog open={openDialog} onClose={handleClose}>
+      <Dialog open={locationDialog} onClose={handleClose}>
         <DialogTitle>Novo Lugarzinho</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -83,16 +104,49 @@ export default function AddContentButtons({ token }) {
             fullWidth
             variant="standard"
           />
-          {/* <CustomUploadButton /> */}
+          Imagem:
           <Input
             margin="dense"
             id="image"
-            label="Anexe sua imagem"
             type="file"
-            ref={filesElement}
             accept="image/*"
             fullWidth
-            variant="standard"
+            onChange={handleFileChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancelar</Button>
+          <Button onClick={handleSend}>Enviar</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={reviewDialog} onClose={handleClose}>
+        <DialogTitle>Nova Avaliação</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Conta aí o que você comeu de tão bom que todo mundo precisa conhecer!
+          </DialogContentText>
+          <Autocomplete
+            value={chosenLocation}
+            onChange={(event, newChosenLocation) => {
+              setChosenLocation(newChosenLocation);
+            }}
+            inputValue={inputLocation}
+            onInputChange={(event, newInputLocation) => {
+              setInputLocation(newInputLocation);
+            }}
+            id="controllable-states-demo"
+            options={locationsArray.map((location) => location.name)}
+            fullWidth
+            renderInput={(params) => <TextField {...params} label="Lugarzinho" />}
+          />
+          {console.log(chosenLocation, inputLocation)}
+          Imagem:
+          <Input
+            margin="dense"
+            id="image"
+            type="file"
+            accept="image/*"
+            fullWidth
             onChange={handleFileChange}
           />
         </DialogContent>

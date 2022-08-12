@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
@@ -21,7 +21,7 @@ export default function SignIn() {
     password: '',
   });
   const navigate = useNavigate();
-  const { loginUser } = useContext(AuthContext);
+  const { auth, loginUser } = useContext(AuthContext);
 
   function handleFormChange(ev) {
     setFormData({
@@ -44,6 +44,12 @@ export default function SignIn() {
       alert(`Erro: ${error.response.data}`);
     }
   }
+
+  useEffect(() => {
+    if (auth) {
+      return navigate('/home');
+    }
+  }, [auth]);
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>

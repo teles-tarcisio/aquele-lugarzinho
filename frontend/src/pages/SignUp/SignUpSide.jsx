@@ -9,6 +9,7 @@ import {
   Paper,
   Box,
   Grid,
+  Input,
   Typography,
 } from '@mui/material';
 import * as api from '../../services/api';
@@ -20,8 +21,10 @@ export default function SignUpSide() {
     email: '',
     password: '',
     repeatedPassword: '',
+    userImageUrl: '',
   });
   const navigate = useNavigate();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   function handleFormChange(ev) {
     setFormData({
@@ -30,19 +33,28 @@ export default function SignUpSide() {
     });
   }
 
+  function handleFileChange(ev) {
+    setSelectedFile(ev.target.files[0]);
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     if (
       !formData?.email || !formData?.password
       || !formData?.name || !formData?.repeatedPassword) {
-      return alert('Favor preencher todos os campos');
+      return alert('Favor preencher todos os campos obrigatórios');
     }
 
     if (formData.repeatedPassword !== formData.password) {
       return alert('As senhas não conferem, tente novamente');
     }
-    delete formData.repeatedPassword;
 
+    const imgUpload = await api.uploadImage(selectedFile);
+    const imgUrl = imgUpload.data.display_url;
+    setFormData({
+      ...formData,
+      userImageUrl: imgUrl,
+    });
     try {
       await api.registerUser(formData);
       alert('Cadastro efetuado com sucesso, por favor faça login');
@@ -117,6 +129,17 @@ export default function SignUpSide() {
               type="password"
               id="repeatedPassword"
               autoComplete="current-password"
+            />
+            <Typography variant="p" color="text.secondary" paragraph>
+              Imagem do Perfil (opcional):
+            </Typography>
+            <Input
+              margin="dense"
+              id="image"
+              type="file"
+              accept="image/*"
+              fullWidth
+              onChange={handleFileChange}
             />
 
             <Button
