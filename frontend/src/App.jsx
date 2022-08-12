@@ -5,12 +5,12 @@ import { red, pink } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Container } from '@mui/material';
 import { AuthProvider } from './contexts/AuthContext';
-import {
-  SignIn,
-  SignUpSide,
-  Home,
-  // NewReview,
-} from './pages/index';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import Home from './pages/Home';
+import Locations from './pages/Locations';
+import Reviews from './pages/Reviews';
+// NewReview,
 
 export default function App() {
   const theme = createTheme({
@@ -33,9 +33,12 @@ export default function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<SignIn />} />
-              <Route path="/sign-up" element={<SignUpSide />} />
-              <Route path="/home" element={<Home />} />
-              {/* <Route path="/new-review" element={<NewReview />} /> */}
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="home" element={<Home />}>
+                <Route path="/home/locations" element={<Locations />} />
+                <Route path="/home/reviews" element={<Reviews />} />
+                {/* <Route path="/new-review" element={<NewReview />} /> */}
+              </Route>
             </Routes>
           </BrowserRouter>
         </Container>

@@ -2,12 +2,13 @@
 import React from 'react';
 import {
   AppBar,
+  Button,
   Toolbar,
   Typography,
   Container,
 } from '@mui/material';
 
-export default function TopBar() {
+export default function TopBar({ logout }) {
   return (
     <AppBar sx={{ bgcolor: 'primary', borderRadius: '12px' }} position="static">
       <Container maxWidth="xl">
@@ -16,7 +17,7 @@ export default function TopBar() {
             variant="h6"
             noWrap
             component="a"
-            href="/home"
+            href="/home/reviews"
             sx={{
               mr: 2,
               display: { md: 'flex' },
@@ -29,6 +30,12 @@ export default function TopBar() {
           >
             aquele lugarzinho
           </Typography>
+          <Button
+            onClick={logout}
+            color="inherit"
+          >
+            sair
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>

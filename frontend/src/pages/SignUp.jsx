@@ -12,8 +12,8 @@ import {
   Input,
   Typography,
 } from '@mui/material';
-import * as api from '../../services/api';
-import BackgroundCollage from '../../components/BackgroundCollage/BackgroundCollage';
+import * as api from '../services/api';
+import BackgroundCollage from '../components/BackgroundCollage/BackgroundCollage';
 
 export default function SignUpSide() {
   const [formData, setFormData] = useState({

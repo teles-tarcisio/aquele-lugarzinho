@@ -81,44 +81,6 @@ export default function AddContentButtons({ auth }) {
           Adicionar Avaliação
         </Button>
       </Stack>
-      <Dialog open={locationDialog} onClose={handleClose}>
-        <DialogTitle>Novo Lugarzinho</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Descobriu um lugar novo que te ganhou? Espalhe a novidade!
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Nome do lugar"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            margin="dense"
-            id="name"
-            label="Endereço do lugar"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          Imagem:
-          <Input
-            margin="dense"
-            id="image"
-            type="file"
-            accept="image/*"
-            fullWidth
-            onChange={handleFileChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleSend}>Enviar</Button>
-        </DialogActions>
-      </Dialog>
       <Dialog open={reviewDialog} onClose={handleClose}>
         <DialogTitle>Nova Avaliação</DialogTitle>
         <DialogContent>

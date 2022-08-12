@@ -11,9 +11,9 @@ import {
   Typography,
 } from '@mui/material';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import AuthContext from '../../contexts/AuthContext';
-import * as api from '../../services/api';
-import BackgroundCollage from '../../components/BackgroundCollage/BackgroundCollage';
+import AuthContext from '../contexts/AuthContext';
+import * as api from '../services/api';
+import BackgroundCollage from '../components/BackgroundCollage/BackgroundCollage';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({
@@ -39,7 +39,7 @@ export default function SignIn() {
     try {
       const login = await api.signUser(formData);
       loginUser({ token: login.data });
-      navigate('/home');
+      navigate('/home/reviews');
     } catch (error) {
       alert(`Erro: ${error.response.data}`);
     }
@@ -47,7 +47,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if (auth) {
-      return navigate('/home');
+      return navigate('/home/reviews');
     }
   }, [auth]);
 
