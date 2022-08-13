@@ -55,23 +55,22 @@ export default function Locations() {
   }
 
   async function handleSend() {
+    if (!formData?.name || !formData?.address) {
+      return alert('Favor preencher todos os campos obrigatórios');
+    }
     const imgUpload = await api.uploadImage(selectedFile);
     setFormData({
       ...formData,
       locationImageUrl: imgUpload.data.display_url,
     });
-    console.log(formData, '<<<sendform');
 
-    if (!formData?.name || !formData?.address) {
-      return alert('Favor preencher todos os campos obrigatórios');
-    }
     try {
       await api.registerLocation(formData, auth.token);
       alert('Novo lugarzinho cadastrado com sucesso!');
       handleClose();
       navigate('/home/locations');
     } catch (error) {
-      alert(`Erro: ${error.response.data}`);
+      alert(`Erro ao cadastrar novo local: ${error.response.data}`);
     }
   }
 

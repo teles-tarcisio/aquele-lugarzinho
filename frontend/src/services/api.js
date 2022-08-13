@@ -63,6 +63,16 @@ async function registerLocation(newLocationData, token) {
   return result;
 }
 
+async function registerReview(newReviewData, token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const result = await axios.post(`${BASE_URL}/reviews/new`, newReviewData, config);
+  return result;
+}
+
 export {
   registerUser,
   signUser,
@@ -70,4 +80,5 @@ export {
   uploadImage,
   getLocations,
   registerLocation,
+  registerReview,
 };
