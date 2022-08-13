@@ -53,10 +53,21 @@ async function getLocations(token) {
   return result;
 }
 
+async function registerLocation(newLocationData, token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const result = await axios.post(`${BASE_URL}/locations/new`, newLocationData, config);
+  return result;
+}
+
 export {
   registerUser,
   signUser,
   getReviews,
   uploadImage,
   getLocations,
+  registerLocation,
 };

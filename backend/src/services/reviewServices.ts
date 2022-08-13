@@ -3,10 +3,10 @@ import {
   userServices,
   locationServices,
 } from '../services/index.js';
-import { NewReviewData } from '../repositories/reviewRepository.js';
+import { CreateReviewData } from '../repositories/reviewRepository.js';
 import { errorUtils } from '../utils/index.js';
 
-async function create(newReview: NewReviewData) {
+async function create(newReview: CreateReviewData) {
   await userServices.userIdExists(newReview.userId);
 
   await locationServices.locationIdExists(newReview.locationId);

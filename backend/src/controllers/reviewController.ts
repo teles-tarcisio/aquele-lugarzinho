@@ -3,7 +3,12 @@ import { reviewServices } from '../services/index.js';
 
 export async function create(req: Request, res: Response) {
   const { validSchema } = res?.locals?.payload;
-  await reviewServices.create(validSchema);
+  const { userAuthData } = res?.locals?.payload;
+  const newReview = {
+    ...validSchema,
+    userId: userAuthData.id,
+  };
+  await reviewServices.create(newReview);
 
   return res.sendStatus(201);
 }

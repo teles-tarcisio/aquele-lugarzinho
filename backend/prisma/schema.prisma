@@ -8,9 +8,9 @@ datasource db {
 }
 
 model User {
-  id           Int    @id @default(autoincrement())
-  nickname     String @unique
-  email        String @unique
+  id           Int     @id @default(autoincrement())
+  nickname     String  @unique
+  email        String  @unique
   password     String
   userImageUrl String?
 
@@ -20,22 +20,23 @@ model User {
 }
 
 model Review {
-  id         Int      @id @default(autoincrement())
-  userId     Int
-  user       User     @relation(fields: [userId], references: [id])
-  reviewText String
-  locationId Int
-  location   Location @relation(fields: [locationId], references: [id])
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  user           User     @relation(fields: [userId], references: [id])
+  reviewText     String
+  locationId     Int
+  location       Location @relation(fields: [locationId], references: [id])
+  reviewImageUrl String?
 
   @@map("reviews")
 }
 
 model Location {
-  id      Int      @id @default(autoincrement())
-  name    String
-  address String
+  id               Int      @id @default(autoincrement())
+  name             String
+  address          String
   locationImageUrl String?
-  reviews Review[]
+  reviews          Review[]
 
   @@map("locations")
 }

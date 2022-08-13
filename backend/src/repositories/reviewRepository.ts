@@ -1,9 +1,10 @@
 import { Review } from '@prisma/client';
 import prisma from '../database/dbConfig.js';
 
-export type NewReviewData = Omit<Review, 'id'>;
+export type NewReviewData = Omit<Review, 'id' | 'userId'>;
+export type CreateReviewData = Omit<Review, 'id'>;
 
-async function insert(newReview: NewReviewData) {
+async function insert(newReview: CreateReviewData) {
   await prisma.review.create({
     data: newReview,
   });
