@@ -5,4 +5,5 @@ import { NewLocationData } from '../repositories/locationRepository.js';
 export const newLocationSchema = Joi.object<NewLocationData>({
   name: Joi.string().trim().min(8).required(),
   address: Joi.string().trim().required(),
+  locationImageUrl: Joi.string().uri(),
 });
