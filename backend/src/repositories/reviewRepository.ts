@@ -14,6 +14,7 @@ async function findAll() {
   const allReviews = await prisma.review.findMany({
     include: {
       user: true,
+      location: true,
     },
   });
 
