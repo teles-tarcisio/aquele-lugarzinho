@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -8,14 +8,9 @@ import {
   Typography,
 } from '@mui/material';
 import TopBar from '../components/TopBar/TopBar';
-import AddContentButtons from '../components/AddContentButtons/AddContentButtons';
-// import CategoryButtons from '../../components/CategoryButtons/CategoryButtons';
-
 import AuthContext from '../contexts/AuthContext';
-import * as api from '../services/api';
 
 export default function Home() {
-  // const [filter, setFilter] = useState('');
   const { auth, logoutUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -36,14 +31,15 @@ export default function Home() {
         <Box
           sx={{
             bgcolor: 'background.paper',
-            pt: 8,
+            pt: 2,
             pb: 6,
             my: 1,
           }}
         >
-          <Container maxWidth="sm">
+          <Container maxWidth="lg">
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              e aí, achou um lugarzinho novo ou tá procurando aquela comida que conforta até a alma?
+              e aí, achou um lugarzinho novo,
+              ou tá procurando aquela comida que conforta até a alma?
             </Typography>
             <Stack
               sx={{ pt: 4 }}

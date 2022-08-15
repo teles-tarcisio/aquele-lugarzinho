@@ -2,24 +2,30 @@
 import React from 'react';
 import {
   AppBar,
+  Box,
   Button,
   Toolbar,
   Typography,
-  Container,
 } from '@mui/material';
 
 export default function TopBar({ logout }) {
   return (
-    <AppBar sx={{ bgcolor: 'primary', borderRadius: '12px' }} position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        sx={{
+          bgcolor: 'primary',
+          borderRadius: '12px',
+        }}
+        position="static"
+      >
+        <Toolbar>
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/home/reviews"
             sx={{
-              mr: 2,
+              flexGrow: 1,
               display: { md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -33,11 +39,14 @@ export default function TopBar({ logout }) {
           <Button
             onClick={logout}
             color="inherit"
+            sx={{
+              textTransform: 'none',
+            }}
           >
             sair
           </Button>
         </Toolbar>
-      </Container>
-    </AppBar>
+      </AppBar>
+    </Box>
   );
 }

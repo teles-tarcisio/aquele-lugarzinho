@@ -76,7 +76,7 @@ export default function Locations() {
   }
 
   return (
-    <Container sx={{ py: 8 }} maxWidth="lg">
+    <Container sx={{ py: 8, flexGrow: 1 }} maxWidth="xl">
       <Box
         sx={{ my: -4 }}
         textAlign="center"

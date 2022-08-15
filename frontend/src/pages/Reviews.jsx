@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Grid,
@@ -11,7 +10,6 @@ import * as api from '../services/api';
 export default function Reviews() {
   const [cards, setCards] = useState([]);
   const { auth } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const reviewCards = api.getReviews(auth.token);
@@ -29,7 +27,6 @@ export default function Reviews() {
           </Grid>
         ))}
       </Grid>
-      {console.log(cards, '<<<reviewcards')}
     </Container>
   );
 }

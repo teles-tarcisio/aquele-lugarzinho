@@ -1,5 +1,4 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import {
   Avatar,
   Button,
@@ -7,15 +6,22 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
   Typography,
 } from '@mui/material';
 
 export default function ReviewCard({ cardContent }) {
-  const navigate = useNavigate();
+  const [openDetails, setOpenDetails] = useState(false);
 
   function handleReviewDetails() {
-    alert('review details');
+    setOpenDetails(true);
+  }
+
+  function handleClose() {
+    setOpenDetails(false);
   }
 
   return (
@@ -46,6 +52,26 @@ export default function ReviewCard({ cardContent }) {
         >
           Detalhes
         </Button>
+        <Dialog open={openDetails} onClose={handleClose}>
+          <DialogTitle>Novo Lugarzinho</DialogTitle>
+          <DialogContent>
+            <CardMedia
+              component="img"
+              sx={{
+                pt: '5%',
+                maxWidth: '85vw',
+              }}
+              image={cardContent.reviewImageUrl}
+              alt="review picture"
+            />
+            <Typography>
+              {cardContent.reviewText}
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>fechar</Button>
+          </DialogActions>
+        </Dialog>
         <Button>
           <Avatar
             id={`user_${cardContent.userId}_avatar`}
