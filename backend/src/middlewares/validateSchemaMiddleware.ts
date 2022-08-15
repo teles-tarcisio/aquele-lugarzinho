@@ -8,13 +8,13 @@ export default function validateSchema(schema: ObjectSchema) {
     if (validation.error) {
       const errorDetails = validation.error.details[0];
       throw errorUtils.wrongSchemaError(errorDetails.message);
+    } else {
+      const validatedSchema = schema.validate(req.body).value;
+      res.locals.payload = {
+        ...res.locals.payload,
+        validSchema: validatedSchema,
+      };
+      next();
     }
-
-    const validatedSchema = schema.validate(req.body).value;
-    res.locals.payload = {
-      ...res.locals.payload,
-      validSchema: validatedSchema,
-    };
-    next();
   };
 }
