@@ -38,9 +38,8 @@ async function uploadImage(imageFile) {
   const body = new FormData();
   body.set('key', IMGBB_KEY);
   body.append('image', imageFile);
-  let uploadResult = null;
   try {
-    uploadResult = await axios.post(IMGBB_URL, body);
+    const uploadResult = await axios.post(IMGBB_URL, body);
     return uploadResult.data;
   } catch (error) {
     alert('Erro ao fazer upload de imagem!');

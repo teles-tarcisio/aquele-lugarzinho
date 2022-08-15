@@ -57,8 +57,6 @@ export default function LocationCard({ cardContent }) {
       ...formData,
       reviewImageUrl: imgUpload.data.display_url,
     });
-    console.log(formData, '<<<COM URL');
-
     try {
       await api.registerReview(formData, auth.token);
       alert('Nova avaliação cadastrada com sucesso!');
