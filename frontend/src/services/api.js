@@ -26,8 +26,12 @@ async function getReviews(token) {
       Authorization: `Bearer ${token}`,
     },
   };
-  const result = await axios.get(`${BASE_URL}/reviews`, config);
-  return result;
+  try {
+    const result = await axios.get(`${BASE_URL}/reviews`, config);
+    return result;
+  } catch (error) {
+    alert(`Erro ao obter reviews: ${error.response.data}`);
+  }
 }
 
 async function uploadImage(imageFile) {
@@ -49,8 +53,12 @@ async function getLocations(token) {
       Authorization: `Bearer ${token}`,
     },
   };
-  const result = await axios.get(`${BASE_URL}/locations`, config);
-  return result;
+  try {
+    const result = await axios.get(`${BASE_URL}/locations`, config);
+    return result;
+  } catch (error) {
+    alert(`Erro ao obter locais: ${error.response.data}`);
+  }
 }
 
 async function registerLocation(newLocationData, token) {
@@ -59,8 +67,12 @@ async function registerLocation(newLocationData, token) {
       Authorization: `Bearer ${token}`,
     },
   };
-  const result = await axios.post(`${BASE_URL}/locations/new`, newLocationData, config);
-  return result;
+  try {
+    const result = await axios.post(`${BASE_URL}/locations/new`, newLocationData, config);
+    return result;
+  } catch (error) {
+    alert(`Erro ao cadastrar novo local: ${error.response.data}`);
+  }
 }
 
 async function registerReview(newReviewData, token) {
@@ -69,8 +81,12 @@ async function registerReview(newReviewData, token) {
       Authorization: `Bearer ${token}`,
     },
   };
-  const result = await axios.post(`${BASE_URL}/reviews/new`, newReviewData, config);
-  return result;
+  try {
+    const result = await axios.post(`${BASE_URL}/reviews/new`, newReviewData, config);
+    return result;
+  } catch (error) {
+    alert(`Erro ao cadastrar nova avaliação: ${error.response.data}`);
+  }
 }
 
 export {

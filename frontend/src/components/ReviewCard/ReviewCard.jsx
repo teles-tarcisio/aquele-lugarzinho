@@ -7,13 +7,15 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  TextField,
   Typography,
 } from '@mui/material';
 
 export default function ReviewCard({ cardContent }) {
   const navigate = useNavigate();
-  function handleAvatarClick(ev) {
-    navigate(`/user-reviews/${ev.target.id}`);
+
+  function handleReviewDetails() {
+    alert('review details');
   }
 
   return (
@@ -23,26 +25,32 @@ export default function ReviewCard({ cardContent }) {
       <CardMedia
         component="img"
         sx={{
-          // 16:9
           pt: '5%',
         }}
-        image="https://source.unsplash.com/random"
-        alt="random"
+        image={cardContent.reviewImageUrl}
+        alt="review picture"
       />
       <CardContent sx={{ flexGrow: 1 }}>
-        <Typography>
+        <Typography
+          noWrap
+        >
           {cardContent.reviewText}
         </Typography>
       </CardContent>
       <CardActions
         sx={{ display: 'flex', justifyContent: 'space-between' }}
       >
-        <Button size="small">Detalhes</Button>
-        <Button onClick={handleAvatarClick}>
+        <Button
+          size="small"
+          onClick={handleReviewDetails}
+        >
+          Detalhes
+        </Button>
+        <Button>
           <Avatar
-            id={cardContent.reviewerId}
+            id={`user_${cardContent.userId}_avatar`}
             alt="User Avatar"
-            src=""
+            src={cardContent.user.userImageUrl}
           />
         </Button>
       </CardActions>

@@ -70,7 +70,6 @@ export default function LocationCard({ cardContent }) {
   }
   return (
     <>
-      {console.log(formData, '<<<<formData')}
       <Card
         sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
         onClick={handleAddReview}

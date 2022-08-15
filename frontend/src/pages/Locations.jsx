@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
+  Box,
   Button,
   Container,
   Dialog,
@@ -76,15 +77,23 @@ export default function Locations() {
 
   return (
     <Container sx={{ py: 8 }} maxWidth="lg">
-      <Button
-        key="add-location-button"
-        sx={{ bgcolor: '#388E3c' }}
-        variant="contained"
-        onClick={handleAddLocation}
-        id="add-location-button"
+      <Box
+        sx={{ my: -4 }}
+        textAlign="center"
       >
-        Adicionar &ldquo;Lugarzinho&rdquo;
-      </Button>
+        <Button
+          key="add-location-button"
+          sx={{
+            bgcolor: '#388E3c',
+            mb: 2,
+          }}
+          variant="contained"
+          onClick={handleAddLocation}
+          id="add-location-button"
+        >
+          Adicionar &ldquo;Lugarzinho&rdquo;
+        </Button>
+      </Box>
       <Dialog open={openDialog} onClose={handleClose}>
         <DialogTitle>Novo Lugarzinho</DialogTitle>
         <DialogContent>
@@ -136,7 +145,6 @@ export default function Locations() {
           </Grid>
         ))}
       </Grid>
-      {console.log(locationCards, '<<locCards')}
     </Container>
   );
 }
