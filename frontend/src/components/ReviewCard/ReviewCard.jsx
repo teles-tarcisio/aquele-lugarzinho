@@ -53,7 +53,7 @@ export default function ReviewCard({ cardContent }) {
           Detalhes
         </Button>
         <Dialog open={openDetails} onClose={handleClose}>
-          <DialogTitle>Novo Lugarzinho</DialogTitle>
+          <DialogTitle>{`Lugarzinho: ${cardContent.location.name}`}</DialogTitle>
           <DialogContent>
             <CardMedia
               component="img"
